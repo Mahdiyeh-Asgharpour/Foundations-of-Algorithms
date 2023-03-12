@@ -21,7 +21,7 @@ for i in range(n2.__len__()):
 def Multiply(n):
     while(n>=0):
     #answer multiply
-        multi==array1[n]*array2[n]
+        multi=int(array1[n])*int(array2[n])
         if(multi>9):
             carry.insert(n+1, multi/10)
         if(n1.__len__()>=n2.__len__()):
@@ -30,8 +30,9 @@ def Multiply(n):
         else:
             if(n==0 or n==n2.__len__()):
                 answer.append(multi+int(carry[n]))
-        multiply(n-1)
+        Multiply(n-1)
+#call function
 if(n1.__len__()>=n2.__len__()):
-    Multiply(n1.__len__())
+    Multiply(n1.__len__()-1)
 else:
-    Multiply(n2.__len__())
+    Multiply(n2.__len__()-1)
