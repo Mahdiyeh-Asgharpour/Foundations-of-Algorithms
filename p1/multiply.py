@@ -1,38 +1,29 @@
 # we should get 2 numbers
 n1=input("number 1:")
 n2=input("number 2:")
-# we have 3 array , carry , charat n1 and n2
-# it means we use charat() for numbers
-array1=[]
-array2=[]
+# we have 1 array  carry ,it does if answer multiply >9 we should do  answer multiply /10 and save to carry
 carry=[]
 answer=[]
 #at first all of element in carry is 0 
 if(n1.__len__()>=n2.__len__()):
-    for i in range(n1.__len__()):
+    for i in range(n1.__len__()-1):
         carry.append(0)
 else:
-    for i in range(n2.__len__()):
+    for i in range(n2.__len__()-1):
         carry.append(0)
-for i in range(n1.__len__()):
-    array1.append(n1[i])
-for i in range(n2.__len__()):
-    array2.append(n2[i])
 def Multiply(n):
-    while(n>=0):
+    if(n<0):
+        return
+    else:
     #answer multiply
-        multi=int(array1[n])*int(array2[n])
+        multi=int(n1[n])*int(n2[n])
         if(multi>9):
-            carry.insert(n+1, multi/10)
-        if(n1.__len__()>=n2.__len__()):
-            if(n==0 or n==n1.__len__()):
-                answer.append(multi+int(carry[n]))
-        else:
-            if(n==0 or n==n2.__len__()):
-                answer.append(multi+int(carry[n]))
+            carry[n-1]=int(multi/10)
+        answer[n]=int(multi%10)+int(carry[n])
         Multiply(n-1)
 #call function
 if(n1.__len__()>=n2.__len__()):
-    Multiply(n1.__len__()-1)
+    Multiply(len(n1)-1)
 else:
-    Multiply(n2.__len__()-1)
+    Multiply(len(n2)-1)
+print(answer,carry)
