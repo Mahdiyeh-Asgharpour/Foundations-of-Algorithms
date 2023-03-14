@@ -20,14 +20,14 @@ def Multiply(n):
         return
     else:
     #answer multiply
-        multi=int(n1[n])*int(n2[n])
-        if(multi>9):
-            carry[n-1]=int(multi/10)
-        answer[n]=int(multi%10)+int(carry[n])
+        for i in range(len(n1)):
+            multi=int(n1[i])*int(n2[n])
+            print(multi)
+            if(multi>9):
+                carry[n-1]=int(multi/10)+int(carry[n-1])
+                print(carry[n-1])
+            answer[n]=int(multi%10)+int(carry[n])+int(answer[n])
+            print(answer[n])
         Multiply(n-1)
 #call function
-if(n1.__len__()>=n2.__len__()):
-    Multiply(len(n1)-1)
-else:
-    Multiply(len(n2)-1)
-print(answer,carry)
+Multiply(len(n2)-1)
