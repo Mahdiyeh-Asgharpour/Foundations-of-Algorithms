@@ -6,11 +6,15 @@ carry=[]
 answer=[]
 #at first all of element in carry is 0 
 if(n1.__len__()>=n2.__len__()):
-    for i in range(n1.__len__()-1):
+    for i in range(n1.__len__()):
         carry.append(0)
+        answer.append(0)
+
 else:
-    for i in range(n2.__len__()-1):
+    for i in range(n2.__len__()):
         carry.append(0)
+        answer.append(0)
+
 def Multiply(n):
     if(n<0):
         return
