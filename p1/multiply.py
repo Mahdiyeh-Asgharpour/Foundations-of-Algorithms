@@ -1,33 +1,30 @@
 # we should get 2 numbers
 n1=input("number 1:")
 n2=input("number 2:")
-# we have 1 array  carry ,it does if answer multiply >9 we should do  answer multiply /10 and save to carry
-carry=[]
-answer=[]
-#at first all of element in carry is 0 
-if(n1.__len__()>=n2.__len__()):
-    for i in range(n1.__len__()):
-        carry.append(0)
-        answer.append(0)
 
-else:
-    for i in range(n2.__len__()):
-        carry.append(0)
-        answer.append(0)
-
-def Multiply(n):
-    if(n<0):
-        return
+def karatsuba(m,n):
+    if(int(m)<10 or int(n)<10):
+        return m*n
     else:
-    #answer multiply
-        for i in range(len(n1)):
-            multi=int(n1[i])*int(n2[n])
-            print(multi)
-            if(multi>9):
-                carry[n-1]=int(multi/10)+int(carry[n-1])
-                print(carry[n-1])
-            answer[n]=int(multi%10)+int(carry[n])+int(answer[n])
-            print(answer[n])
-        Multiply(n-1)
-#call function
-Multiply(len(n2)-1)
+        mstring = str(m)
+        nstring = str(n)
+
+        k = max(len(mstring), len(nstring))
+        mid=int(k/2)
+            #finding a and c i.e. the higher bits for each number
+        a = int(mstring[:-mid])
+        c = int(nstring[:-mid])
+
+            #finding b and d i.e. the lower bits for each number
+        b = int(mstring[-mid:])
+        d = int(nstring[-mid:])
+
+            #finding ac, bd and ad_plus_bc
+        ac = karatsuba(a, c)
+        bd = karatsuba(b, d)
+        ad_plus_bc = karatsuba(a + b, c + d) - ac - bd
+
+        return ac*10**(2 * mid) + ad_plus_bc*10**(mid) + bd
+karatsuba(n1,n2)
+
+print(karatsuba(n1,n2)[len(karatsuba(n1,n2))-1]^karatsuba(n1,n2)[0])
