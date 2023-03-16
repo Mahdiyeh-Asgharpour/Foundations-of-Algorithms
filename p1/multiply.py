@@ -1,7 +1,7 @@
 # we should get 2 numbers
 n1=input("number 1:")
 n2=input("number 2:")
-
+#this function is in internet
 def karatsuba(m,n):
     if(int(m)<10 or int(n)<10):
         return m*n
@@ -25,6 +25,7 @@ def karatsuba(m,n):
         ad_plus_bc = karatsuba(a + b, c + d) - ac - bd
 
         return ac*10**(2 * mid) + ad_plus_bc*10**(mid) + bd
+#call function
 karatsuba(n1,n2)
-
-print(karatsuba(n1,n2)[len(karatsuba(n1,n2))-1]^karatsuba(n1,n2)[0])
+#conditions is in document, we use[] for string , so we change it , then we want do conditions so we change it to int.
+print(int(str(karatsuba(n1,n2))[0])**int(str(karatsuba(n1,n2))[len(str(karatsuba(n1,n2)))-1]))
