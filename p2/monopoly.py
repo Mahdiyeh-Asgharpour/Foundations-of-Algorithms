@@ -1,7 +1,10 @@
 x=input()
 array=x.split(",")
+#index
 y=0
+#next move
 z=0
+#moves
 n=0
 na=[]
 z=int(array[y])+int(y)
