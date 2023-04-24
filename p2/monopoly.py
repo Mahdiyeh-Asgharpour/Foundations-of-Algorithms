@@ -1,27 +1,45 @@
 x=input()
-array=x.split(",")
-#index
-y=0
-#next move
-z=0
-#moves
-n=0
-na=[]
-z=int(array[y])+int(y)
-def f(z,y):
-    if int(array[y])==0:
-        n=n+1
-        na.append(array[y])
-        print("Unreachable!")
-    else:
-        if z>len(array):
-            pass
-        else:
-            y=y+1
-            z=int(array[y])+int(y)
-            n=n+1
-            na.append(array(y))
-            f(z,y)
-        print(n)
-f(z,y)
-print(na)
+arr=x.split(",")
+# Python3 program to find Minimum
+# number of jumps to reach end
+ 
+# Returns minimum number of jumps
+# to reach arr[h] from arr[l]
+ 
+ 
+def minJumps(arr, l, h):
+ 
+    # Base case: when source and
+    # destination are same
+    if (h == l):
+        return 0
+ 
+    # when nothing is reachable
+    # from the given source
+    if (int(arr[l]) == 0):
+        return float('inf')
+ 
+    # Traverse through all the points
+    # reachable from arr[l]. Recursively
+    # get the minimum number of jumps
+    # needed to reach arr[h] from
+    # these reachable points.
+    min = float('inf')
+    for i in range(l + 1, h + 1):
+        if (i < l + int(arr[l]) + 1):
+            jumps = minJumps(arr, i, h)
+            if (jumps != float('inf') and
+                    jumps + 1 < min):
+                min = jumps + 1
+ 
+    return min
+ 
+ 
+# Driver program to test above function
+n = len(arr)
+if  minJumps(arr, 0, n-1)==float('inf'):
+    print("Unreachable!")
+else:
+    print( minJumps(arr, 0, n-1))
+ 
+# This code is contributed by Soumen Ghosh
