@@ -1,45 +1,34 @@
 x=input()
 arr=x.split(",")
-# Python3 program to find Minimum
-# number of jumps to reach end
- 
-# Returns minimum number of jumps
-# to reach arr[h] from arr[l]
- 
- 
-def minJumps(arr, l, h):
- 
-    # Base case: when source and
-    # destination are same
-    if (h == l):
-        return 0
- 
-    # when nothing is reachable
-    # from the given source
-    if (int(arr[l]) == 0):
-        return float('inf')
- 
-    # Traverse through all the points
-    # reachable from arr[l]. Recursively
-    # get the minimum number of jumps
-    # needed to reach arr[h] from
-    # these reachable points.
-    min = float('inf')
-    for i in range(l + 1, h + 1):
-        if (i < l + int(arr[l]) + 1):
-            jumps = minJumps(arr, i, h)
-            if (jumps != float('inf') and
-                    jumps + 1 < min):
-                min = jumps + 1
- 
-    return min
- 
- 
-# Driver program to test above function
+def monopoly(arr, n):
+    path = [[] for i in range(n)]
+
+    path[n - 1].append(n - 1)
+
+    for i in range(n - 2, -1, -1):
+        if int(arr[i]) >= n - i - 1:
+            path[i].append(i)
+            path[i].append(n - 1)
+        else:
+            min_jumps = float('inf')
+            index = 0
+            for j in range(i + 1, n - 1):
+                if j - i <= int(arr[i]):
+                    if len(path[j]) <= min_jumps:
+                        min_jumps = len(path[j])
+                        index = j
+
+            path[i].append(i)
+            path[i].extend(path[index])
+
+    if path[0][len(path[0]) - 1] == n - 1:
+        print(len(path[0]) - 1)
+        print(*[arr[i] for i in path[0]], sep="-")
+    else:
+        print("Unreachable!")
+        print(*[arr[i] for i in path[0]], sep="-")
+
+
+
 n = len(arr)
-if  minJumps(arr, 0, n-1)==float('inf'):
-    print("Unreachable!")
-else:
-    print( minJumps(arr, 0, n-1))
- 
-# This code is contributed by Soumen Ghosh
+monopoly(arr, n)
